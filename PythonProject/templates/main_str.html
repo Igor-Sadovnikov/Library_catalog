@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <style>
+        .btn {
+         display: inline-block; /* Строчно-блочный элемент */
+         background: #8C959D; /* Серый цвет фона */
+         color: #fff; /* Белый цвет текста */
+         padding: 1rem 1.5rem; /* Поля вокруг текста */
+         text-decoration: none; /* Убираем подчёркивание */
+         border-radius: 3px; /* Скругляем уголки */
+        }
+       </style>
+      <body> 
+       <a href="{{ url_for('list_of_books')}}" class="btn">Перейти в каталог</a>
+      </body>
+    {% if user_id == 2 %}
+        <a href="{{ url_for('add_book')}}" class="btn">Добавить книгу</a>
+    {% else %}
+        <button disabled>Добавить книгу</button>
+    {% endif %}
+{% endblock %}
