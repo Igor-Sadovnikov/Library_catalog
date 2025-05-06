@@ -77,6 +77,7 @@ class Books(SqlAlchemyBase): # модель книги
     date = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login(): # обработчик авторизации
     form = LoginForm()
