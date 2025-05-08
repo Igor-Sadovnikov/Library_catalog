@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<style>
+    .btn {
+     display: inline-block;
+     background: #454545;
+     color: #fff;
+     padding: 1rem 1.5rem;
+     text-decoration: none;
+     border-radius: 3px;
+    }
+   </style>
+<body> 
+    <a href="{{ url_for('main_str')}}" class="btn">Вернуться на главную</a>
+    <a href="{{ url_for('list_of_books') }}" class="btn">Вернуться в каталог</a>
+</body>
+{% if reviews %}
+    <h3 align="center">Список отзывов на книгу</h3>
+    <h3 align="center">{{ author_book }} {{ name_book }}</h3>
+    {% for review in reviews %}
+        <h4 align="center">Отзыв от {{ review.author_of_review }} {{ review.date }}</h4>
+        <pre>{{ review.review_text }}</pre>
+
+        <h1></h1>
+    {% endfor %}
+{% else %}
+<h2></h2>
+<h2></h2>
+<h3 align="center">На эту книгу ещё никто не написал отзыв.</h3>
+<h2></h2>
+<h2></h2>
+{% endif %}
+<a href="{{ url_for('add_review', book_id=book_id)}}">Написать отзыв на эту книгу</a></td>
+<h1></h1>
+{% endblock %}
