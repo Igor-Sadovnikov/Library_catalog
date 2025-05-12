@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Книгу может добавить только администратор.</h2>
+<meta charset="UTF-8">
+<style>
+    .btn {
+     display: inline-block;
+     background: #454545;
+     color: #fff;
+     padding: 1rem 1.5rem;
+     text-decoration: none;
+     border-radius: 3px;
+    }
+    .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+   </style>
+<body> 
+    <a href="{{ url_for('main_str')}}" class="btn">Вернуться на главную</a>
+</body>
+{% endblock %}
