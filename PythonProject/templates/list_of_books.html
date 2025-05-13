@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<style>
+    .btn {
+     display: inline-block;
+     background: #454545;
+     color: #fff;
+     padding: 1rem 1.5rem;
+     text-decoration: none;
+     border-radius: 3px;
+    }
+   </style>
+<body> 
+    <a href="{{ url_for('main_str')}}" class="btn">Вернуться на главную</a>
+</body>
+<h2 align="center">Список книг</h2>
+{% for book in books %}
+<h3>Книга # {{ book.id }}</h3>
+{% if current_user.id == 2 %}
+<a href="{{ url_for('delete_book', book_id=book.id)}}" class="btn">Удалить книгу</a>
+{% endif %}
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <td class="title" width="400px" bgcolor="#dddddd">Название книги</td>
+            <td class="title" width="150px" bgcolor="#dddddd">Автор</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">В наличии</td>
+            <td class="title" width="200px" bgcolor="#dddddd" align="center">Читатель</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Срок сдачи</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Взять книгу</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Смотреть отзывы</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Написать отзыв</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#eeeeff">{{ book.name }}</td>
+            <td class="ordinary" bgcolor="#eeeeff">{{ book.author }}</td>
+            {% if book.is_available %}
+            <td class="ordinary" bgcolor="#eeffee" align="center">В наличии</td>
+            {% else %}
+            <td class="ordinary" bgcolor="#ffeeff" align="center">Занята</td>
+            {% endif %}
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ book.reader_name}}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ book.date }}</td>
+            {% if book.is_available %}
+            <td class="ordinary" bgcolor="#eeeeff" align="center">
+                <a href="{{ url_for('toggle_on', book_id=book.id)}}">Взять книгу</a></td>
+            {% elif current_user.id == book.reader %}
+            <td class="ordinary" bgcolor="#eeeeff" align="center">
+                <a href="{{ url_for('toggle_off', book_id=book.id)}}">Вернуть книгу</a></td>
+            {% else %}
+            <td class="ordinary" bgcolor="#eeeeff" align="center"></td>
+            {% endif %}
+            <td class="ordinary" bgcolor="#eeeeff" align="center">
+                <a href="{{ url_for('list_of_reviews', book_id=book.id)}}">Смотреть отзывы</a></td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">
+                <a href="{{ url_for('add_review', book_id=book.id)}}">Добавить отзыв</a></td>
+        </tr>
+    </table>
+
+</div>
+<br>
+
+{% endfor %}
+
+{% endblock %}

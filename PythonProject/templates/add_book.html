@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <style>
+        .btn {
+         display: inline-block; /* Строчно-блочный элемент */
+         background: #454545; /* Серый цвет фона */
+         color: #fff; /* Белый цвет текста */
+         padding: 1rem 1.5rem; /* Поля вокруг текста */
+         text-decoration: none; /* Убираем подчёркивание */
+         border-radius: 3px; /* Скругляем уголки */
+         position:relative;
+         right:5;
+         left:4;
+         top:2;
+         bottom:4
+        }
+       </style>
+    <body>
+
+    </body>
+    <h1>Добавление книги</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(class="form-control") }}<br>
+            {% for error in form.name.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.author.label }}<br>
+            {{ form.author(class="form-control") }}<br>
+            {% for error in form.author.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}
+ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+            <a href="{{ url_for('main_str')}}" class="btn">Вернуться на главную</a></p>
+        {{message}}
+    </form>
+{% endblock %}
